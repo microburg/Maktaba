@@ -2,16 +2,16 @@
 
 ### **1. Factory Pattern**
 
-**Description**:  
+**Description:**
 The **Factory Pattern** is a creational pattern that provides a way to create objects without specifying the exact class of object that will be created.
 
-**Before the Pattern**:  
+**Before the Pattern:**  
 We would directly instantiate the pizza objects in the main program, which would make the code harder to extend when adding new types of pizzas.
 
-**After the Pattern**:  
+**After the Pattern:**  
 Now, the code uses the **PizzaFactory** class to create the pizza objects. This abstraction makes the code more maintainable and extensible by allowing easy addition of new pizza types.
 
-**Code Example**:
+**Code Example:**
 
     class PizzaFactory:
         @staticmethod
@@ -29,16 +29,16 @@ Now, the code uses the **PizzaFactory** class to create the pizza objects. This 
 ---
 
 ### **2. Decorator Pattern**
-**Description**:
+**Description:**
 The Decorator Pattern is a structural pattern that allows for dynamic extension of object functionality. It provides an alternative to subclassing for extending functionality.
 
-**Before the Pattern**:
+**Before the Pattern:**
 We would need to subclass the pizza class every time we want to add a new topping. This would lead to a bloated class hierarchy.
 
-**After the Pattern**:
+**After the Pattern:**
 The decorator pattern allows us to add new toppings without modifying the base pizza class or creating new subclasses. This makes the code more flexible and maintainable.
 
-**Code Example**:
+**Code Example:**
 
     class ToppingDecorator(Pizza):
         def __init__(self, base_pizza: Pizza):
@@ -57,23 +57,23 @@ The decorator pattern allows us to add new toppings without modifying the base p
         def get_cost(self) -> float:
             return self.base_pizza.get_cost() + 1.0
 
-# Usage:
-pizza = Margherita()
-pizza = Cheese(pizza)  # Adds Cheese topping
+    # Usage:
+    pizza = Margherita()
+    pizza = Cheese(pizza)  # Adds Cheese topping
 
 ---
 
 ### **3. Strategy Pattern**
-**Description**:
+**Description:**
 The Strategy Pattern is a behavioral pattern that allows selecting an algorithm or behavior at runtime. It is used to define a family of algorithms and make them interchangeable.
 
-**Before the Pattern**:
+**Before the Pattern:**
 The payment logic would be tightly coupled with the rest of the order handling code, making it hard to extend or replace.
 
-***After the Pattern**:
+***After the Pattern:**
 We can add new payment methods without modifying the existing system. Each payment method is encapsulated in a separate class that implements a common interface.
 
-**Code Example**:
+**Code Example:**
 
     class PaymentMethod(ABC):
         @abstractmethod
@@ -97,7 +97,7 @@ Overengineering occurs when the complexity of a solution exceeds what is necessa
 **Example of Overengineering:**
 For instance, implementing separate classes for each type of pizza topping, when they could have been handled by a single class or a more straightforward solution, could be considered overengineering.
 
-**Code Example**:
+**Code Example:**
 
     class CheeseTopping:
         def add_topping(self, pizza: Pizza):
