@@ -32,22 +32,22 @@ The **ToppingDecorator** and its subclasses can be substituted for the base pizz
 -Liskov Substitution Principle is followed because any topping class can be substituted for a base pizza class without affecting the overall functionality of the system.
 
 **Example Code:**
-class ToppingDecorator(Pizza):
-    def __init__(self, base_pizza: Pizza):
-        self.base_pizza = base_pizza
+    class ToppingDecorator(Pizza):
+        def __init__(self, base_pizza: Pizza):
+            self.base_pizza = base_pizza
 
-    def get_description(self) -> str:
-        return self.base_pizza.get_description()
+        def get_description(self) -> str:
+            return self.base_pizza.get_description()
 
-    def get_cost(self) -> float:
-        return self.base_pizza.get_cost()
+        def get_cost(self) -> float:
+            return self.base_pizza.get_cost()
 
-class Cheese(ToppingDecorator):
-    def get_description(self) -> str:
-        return self.base_pizza.get_description() + ", Cheese"
+    class Cheese(ToppingDecorator):
+        def get_description(self) -> str:
+            return self.base_pizza.get_description() + ", Cheese"
 
-    def get_cost(self) -> float:
-        return self.base_pizza.get_cost() + 1.0
+        def get_cost(self) -> float:
+            return self.base_pizza.get_cost() + 1.0
 
 ---
 
