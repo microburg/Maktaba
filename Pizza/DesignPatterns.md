@@ -5,10 +5,10 @@
 **Description:**
 The **Factory Pattern** is a creational pattern that provides a way to create objects without specifying the exact class of object that will be created.
 
-**Before the Pattern:**  
+**Before the Pattern:**
 We would directly instantiate the pizza objects in the main program, which would make the code harder to extend when adding new types of pizzas.
 
-**After the Pattern:**  
+**After the Pattern:**
 Now, the code uses the **PizzaFactory** class to create the pizza objects. This abstraction makes the code more maintainable and extensible by allowing easy addition of new pizza types.
 
 **Code Example:**
