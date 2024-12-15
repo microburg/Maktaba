@@ -17,7 +17,7 @@ This is a RESTful API for managing a library's collection of books. The API allo
 
 ### Prerequisites
 - Docker installed on your machine.
-- Python (if running without Docker).
+- Python.
 
 ---
 
