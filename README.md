@@ -32,6 +32,6 @@ This is a RESTful API for managing a library's collection of books. The API allo
 ### **Add requests for each endpoint:**
    - **POST `/books`**: Add a sample book.
    - **GET `/books`**: Retrieve all books.
-   - **GET `/books/search`**: Search by filters (e.g., `?author=Author Name`).
+   - **GET `/books/search`**: Search by filters.
    - **PUT `/books/<isbn>`**: Update a book by ISBN.
    - **DELETE `/books/<isbn>`**: Delete a book by ISBN.
