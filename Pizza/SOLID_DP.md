@@ -9,7 +9,7 @@
 **How the Factory Pattern Helps Implement the SOLID Principles:**
 - It also adheres to the **Single Responsibility Principle** because the class is responsible solely for pizza creation, without taking on other tasks like payment or inventory management.
 
-**Example Code**:
+**Example Code:**
 class PizzaFactory:
     @staticmethod
     def create_pizza(pizza_type: str) -> Pizza:
