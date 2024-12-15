@@ -10,15 +10,16 @@
 - It also adheres to the **Single Responsibility Principle** because the class is responsible solely for pizza creation, without taking on other tasks like payment or inventory management.
 
 **Example Code:**
-class PizzaFactory:
-    @staticmethod
-    def create_pizza(pizza_type: str) -> Pizza:
-        if pizza_type == "Margherita":
-            return Margherita()
-        elif pizza_type == "Pepperoni":
-            return Pepperoni()
-        else:
-            raise ValueError("Invalid Pizza Type")
+
+    class PizzaFactory:
+        @staticmethod
+        def create_pizza(pizza_type: str) -> Pizza:
+            if pizza_type == "Margherita":
+                return Margherita()
+            elif pizza_type == "Pepperoni":
+                return Pepperoni()
+            else:
+                raise ValueError("Invalid Pizza Type")
 
 ---
 
@@ -63,15 +64,16 @@ The Strategy Pattern allows us to introduce new payment methods without modifyin
 -Open/Closed Principle is adhered to because new payment methods can be added by introducing new strategy classes without altering existing code.
 
 **Example Code:**
-class PaymentMethod(ABC):
-    @abstractmethod
-    def pay(self, amount: float):
-        pass
 
-class PayPal(PaymentMethod):
-    def pay(self, amount: float):
-        print(f"Paid ${amount:.2f} using PayPal.")
+    class PaymentMethod(ABC):
+        @abstractmethod
+        def pay(self, amount: float):
+            pass
 
-class CreditCard(PaymentMethod):
-    def pay(self, amount: float):
-        print(f"Paid ${amount:.2f} using Credit Card.")
+    class PayPal(PaymentMethod):
+        def pay(self, amount: float):
+            print(f"Paid ${amount:.2f} using PayPal.")
+
+    class CreditCard(PaymentMethod):
+        def pay(self, amount: float):
+            print(f"Paid ${amount:.2f} using Credit Card.")

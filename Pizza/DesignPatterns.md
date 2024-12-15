@@ -12,18 +12,19 @@ We would directly instantiate the pizza objects in the main program, which would
 Now, the code uses the **PizzaFactory** class to create the pizza objects. This abstraction makes the code more maintainable and extensible by allowing easy addition of new pizza types.
 
 **Code Example**:
-class PizzaFactory:
-    @staticmethod
-    def create_pizza(pizza_type: str) -> Pizza:
-        if pizza_type == "Margherita":
-            return Margherita()
-        elif pizza_type == "Pepperoni":
-            return Pepperoni()
-        else:
-            raise ValueError("Invalid Pizza Type")
 
-# Usage:
-pizza = PizzaFactory.create_pizza("Margherita")
+    class PizzaFactory:
+        @staticmethod
+        def create_pizza(pizza_type: str) -> Pizza:
+            if pizza_type == "Margherita":
+                return Margherita()
+            elif pizza_type == "Pepperoni":
+                return Pepperoni()
+            else:
+                raise ValueError("Invalid Pizza Type")
+
+    # Usage:
+    pizza = PizzaFactory.create_pizza("Margherita")
 
 ---
 
@@ -38,22 +39,23 @@ We would need to subclass the pizza class every time we want to add a new toppin
 The decorator pattern allows us to add new toppings without modifying the base pizza class or creating new subclasses. This makes the code more flexible and maintainable.
 
 **Code Example**:
-class ToppingDecorator(Pizza):
-    def __init__(self, base_pizza: Pizza):
-        self.base_pizza = base_pizza
 
-    def get_description(self) -> str:
-        return self.base_pizza.get_description()
+    class ToppingDecorator(Pizza):
+        def __init__(self, base_pizza: Pizza):
+            self.base_pizza = base_pizza
 
-    def get_cost(self) -> float:
-        return self.base_pizza.get_cost()
+        def get_description(self) -> str:
+            return self.base_pizza.get_description()
 
-class Cheese(ToppingDecorator):
-    def get_description(self) -> str:
-        return self.base_pizza.get_description() + ", Cheese"
+        def get_cost(self) -> float:
+            return self.base_pizza.get_cost()
 
-    def get_cost(self) -> float:
-        return self.base_pizza.get_cost() + 1.0
+    class Cheese(ToppingDecorator):
+        def get_description(self) -> str:
+            return self.base_pizza.get_description() + ", Cheese"
+
+        def get_cost(self) -> float:
+            return self.base_pizza.get_cost() + 1.0
 
 # Usage:
 pizza = Margherita()
@@ -72,18 +74,19 @@ The payment logic would be tightly coupled with the rest of the order handling c
 We can add new payment methods without modifying the existing system. Each payment method is encapsulated in a separate class that implements a common interface.
 
 **Code Example**:
-class PaymentMethod(ABC):
-    @abstractmethod
-    def pay(self, amount: float):
-        pass
 
-class PayPal(PaymentMethod):
-    def pay(self, amount: float):
-        print(f"Paid ${amount:.2f} using PayPal.")
+    class PaymentMethod(ABC):
+        @abstractmethod
+        def pay(self, amount: float):
+            pass
 
-class CreditCard(PaymentMethod):
-    def pay(self, amount: float):
-        print(f"Paid ${amount:.2f} using Credit Card.")
+    class PayPal(PaymentMethod):
+        def pay(self, amount: float):
+            print(f"Paid ${amount:.2f} using PayPal.")
+
+    class CreditCard(PaymentMethod):
+        def pay(self, amount: float):
+            print(f"Paid ${amount:.2f} using Credit Card.")
 
 ---
 
@@ -95,12 +98,13 @@ Overengineering occurs when the complexity of a solution exceeds what is necessa
 For instance, implementing separate classes for each type of pizza topping, when they could have been handled by a single class or a more straightforward solution, could be considered overengineering.
 
 **Code Example**:
-class CheeseTopping:
-    def add_topping(self, pizza: Pizza):
-        pizza = Cheese(pizza)
-        return pizza
 
-class OlivesTopping:
-    def add_topping(self, pizza: Pizza):
-        pizza = Olives(pizza)
-        return pizza
+    class CheeseTopping:
+        def add_topping(self, pizza: Pizza):
+            pizza = Cheese(pizza)
+            return pizza
+
+    class OlivesTopping:
+        def add_topping(self, pizza: Pizza):
+            pizza = Olives(pizza)
+            return pizza
