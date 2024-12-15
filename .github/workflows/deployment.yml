@@ -1,0 +1,30 @@
+name: Deploy to Azure
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  deploy:
+    name: Deploy to Azure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Deploy to Azure
+        env:
+          AZURE_WEBAPP_NAME: your-webapp-name
+          AZURE_WEBAPP_PACKAGE_PATH: "."
+        run: |
+          # Add Azure deployment CLI commands here
