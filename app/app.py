@@ -5,63 +5,63 @@ import json
 app = Flask(__name__)
 
 # To store in the JSON file
-def load_data():
+def load():
     with open('./data.json', 'r') as file:
         return json.load(file)
 
-def save_data(data):
+def save(data):
     with open('./data.json', 'w') as file:
         json.dump(data, file, indent=4)
 
 # CRUD Endpoints
 @app.route('/books', methods=['POST'])
 def add_book():
-    data = load_data()
+    data = load()
     new_book = request.json
 
     # Ensure required fields are present
     if not all(key in new_book for key in ('title', 'author', 'published_year', 'isbn')):
-        return jsonify({"error": "Missing required fields!"}), 400
+        return jsonify({"error": "Missing fields!"}), 400
 
     # Check for duplicate
     if any(book['isbn'] == new_book['isbn'] for book in data):
-        return jsonify({"error": "ISBN already exists!"}), 400
+        return jsonify({"error": "ISBN exists!"}), 400
 
     data.append(new_book)
-    save_data(data)
-    return jsonify({"message": "Book added successfully!"}), 201
+    save(data)
+    return jsonify({"message": "Book added!"}), 201
 
 @app.route('/books', methods=['GET'])
-def list_books():
-    return jsonify(load_data())
+def list_all_books():
+    return jsonify(load())
 
 @app.route('/books/search', methods=['GET'])
-def search_books():
-    data = load_data()
+def search_for_books():
+    data = load()
     filters = request.args
     filtered_books = [book for book in data if all(str(book.get(k, '')).lower() == v.lower() for k, v in filters.items())]
     return jsonify(filtered_books)
 
 @app.route('/books/<isbn>', methods=['PUT'])
-def update_book(isbn):
-    data = load_data()
+def update_a_book(isbn):
+    data = load()
     book = next((b for b in data if b['isbn'] == isbn), None)
     if not book:
         return jsonify({"error": "Book not found!"}), 404
 
     updates = request.json
     book.update(updates)
-    save_data(data)
+    save(data)
     return jsonify({"message": "Book updated successfully!"})
 
 @app.route('/books/<isbn>', methods=['DELETE'])
-def delete_book(isbn):
-    data = load_data()
+def delete_a_book(isbn):
+    data = load()
     updated_data = [b for b in data if b['isbn'] != isbn]
     if len(data) == len(updated_data):
         return jsonify({"error": "Book not found!"}), 404
 
-    save_data(updated_data)
+    save(updated_data)
     return jsonify({"message": "Book deleted successfully!"})
 
 # Swagger Integration
