@@ -7,8 +7,9 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Azure
+    name: Deploy Application to Azure
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,9 +23,9 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Deploy to Azure
-        env:
-          AZURE_WEBAPP_NAME: your-webapp-name
-          AZURE_WEBAPP_PACKAGE_PATH: "."
-        run: |
-          # Add Azure deployment CLI commands here
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_APP_NAME }}
+          slot-name: production
+          publish-profile: ${{ secrets.AZURE_CLIENT_SECRET }}
