@@ -1,0 +1,37 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Flask specific files
+instance/
+*.db
+*.sqlite3
+*.sqlite
+
+# Environment files
+.env
+*.env
+
+# IDE and editor specific files
+.vscode/
+.idea/
+
+# macOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+
+# Log files
+*.log
+
+# Other system files
+*.bak
+*.swp
